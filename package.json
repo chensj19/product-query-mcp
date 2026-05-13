@@ -1,0 +1,31 @@
+{
+  "name": "product-query-mcp",
+  "version": "1.0.0",
+  "description": "MCP service for querying product-version-iteration-app-submodule chain",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "bundle": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/bundle.js --external:mysql2 --external:@modelcontextprotocol/sdk --external:dotenv --external:dotenv/config",
+    "build:prod": "npm run build && npm run bundle",
+    "pack:full": "npm run build && tar -czf product-query-mcp-full.tar.gz dist package.json node_modules",
+    "start": "node dist/index.js",
+    "start:bundle": "node dist/bundle.js",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^17.4.2",
+    "mysql2": "^3.11.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "esbuild": "^0.28.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
